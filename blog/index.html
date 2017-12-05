@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html>
- <head>
-   <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-   <title></title>
- </head>
- <body>
+<html ng-app='app'>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title></title>
+</head>
 
+<body ng-controller='myCtrl'>
+  <nav>
+    <input placeholder='search by title' ng-model='input.title' />
+    <!--property names on filter have to match names on the object being filtered-->
+    <input placeholder='search by posts' ng-model='input.posts' />
+    <input placeholder='search by date' ng-model='input.entry_date' />
+  </nav>
+  <button type='button' ng-click='makeNewPost=!makeNewPost'>Make new post</button>
+  <div ng-show='makeNewPost'>
+    <input placeholder='title' ng-model='newPost.title' />
+    <input placeholder='body' ng-model='newPost.posts' />
+    <input placeholder='date' ng-model='newPost.entry_date' />
+    <button type='button' ng-click='addPost(newPost)'>Submit</button>
+
+  </div>
+  <div ng-repeat='post in diary | filter : input track by $index'>
+    <h3>{{post.title}}</h3>
+    <h6>{{post.entry_date}}</h6>
+    <p>{{post.posts}}</p>
+    <!-- <img src='{{post.img_url}}' />either one works -->
+    <img ng-src='{{post.img_url}}' />
+    <hr>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+  <script src=' app.js '></script>
+  <script src='myCtrl.js '></script>
 
 </body>
+
 </html>
